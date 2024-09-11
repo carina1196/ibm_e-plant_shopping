@@ -8,6 +8,7 @@ function ProductList() {
   const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
   const [addedToCart, setAddedToCart] = useState({});
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+  const addedPlants = useSelector((state) => state.cart.plantInCart);
   const dispatch = useDispatch();
 
   const plantsArray = [
@@ -379,8 +380,11 @@ function ProductList() {
                     <button
                       className="product-button"
                       onClick={() => handleAddToCart(plant)}
+                      disabled={addedPlants.find((item) => item === plant.name)}
                     >
-                      Add to Cart
+                      {!addedPlants.find((item) => item === plant.name)
+                        ? "Add to Cart"
+                        : "Added to Cart"}
                     </button>
                   </div>
                 ))}
